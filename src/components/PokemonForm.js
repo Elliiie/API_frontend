@@ -3,6 +3,7 @@ import update from 'immutability-helper';
 import $ from 'jquery';
 
 export default class PokemonForm extends React.Component {
+
   static propTypes = {
     handleNewPokemon: PropTypes.func
   }
@@ -11,12 +12,12 @@ export default class PokemonForm extends React.Component {
     super(props)
     this.state = {
       name: {value: '', valid: false},
-      level: {value: 0, valid: false},
+      level: {value: null, valid: false},
       primary_type: {value: '', valid: false},
       secondary_type: {value: '', valid: false},
       trainer_name: {value: '', valid: false},
-      hight: {value: 0.0, valid: false},
-      weight: {value: 0.0, valid:false},
+      hight: {value: null, valid: false},
+      weight: {value: null, valid:false},
       gender: {value:'', valid:false},
       region: {value:'', valid: false},
       formValid: false,
@@ -117,14 +118,14 @@ export default class PokemonForm extends React.Component {
 
   addPokemon () {
     const pokemon = {name: this.state.name.value,
-                         level: this.state.level.value,
-                         primary_type: this.state.primary_type.value,
-                         secondary_type: this.state.secondary_type.value,
-                         trainer_name: this.state.trainer_name.value,
-                         hight: this.state.hight.value,
-                         weight: this.state.weight.value,
-                         gender: this.state.gender.value,
-                         region: this.state.region.value};
+                     level: this.state.level.value,
+                     primary_type: this.state.primary_type.value,
+                     secondary_type: this.state.secondary_type.value,
+                     trainer_name: this.state.trainer_name.value,
+                     hight: this.state.hight.value,
+                     weight: this.state.weight.value,
+                     gender: this.state.gender.value,
+                     region: this.state.region.value};
     $.post('http://localhost:3001/pokemons',
             {pokemon: pokemon})
           .done((data) => {

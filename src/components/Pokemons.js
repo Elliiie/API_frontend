@@ -28,7 +28,8 @@ export default class Pokemons extends React.Component {
         url: 'http://localhost:3001/pokemons',
         dataType: "JSON"
       }).done((data) => {
-        this.setState({pokemons: data});
+        var realData = $.makeArray(data);
+        this.setState({pokemons: realData});
       }).fail((response) => {
         if(response.status === 401) {
           console.log('unauth');

@@ -16,7 +16,7 @@ class App extends Component {
       type: "GET",
       url: 'http://localhost:3001/pokemons'
     }).done(data => {
-      this.setState({appointments: data});
+      this.setState({pokemons: data});
     });
   }
 
@@ -25,7 +25,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Welcome to Pokedex </h2>
         </div>
         <div className="App-intro">
           {this.state.pokemons.map(pokemon => {
