@@ -9,8 +9,8 @@ export default (props) => {
 		<Router>
 			<div>
 				<Route exact path="/" component={Pokemons} />
-				<Route exact path="/pokemons/:id" component={Pokemon} />
-				<Route path="/pokemons/:id/edit" component={PokemonForm} />
+				<Route exact path="/pokemons/:id" render={(props)=><Pokemons {...props}/>} />
+				<Route path="/pokemons/:id/edit" render={(props)=><PokemonForm {...props}/>} />
 			</div>
 		</Router>
 	)

@@ -10,6 +10,18 @@ export default class Pokemon extends React.Component {
     }
   }
 
+  handleDelete(id){
+    fetch(`http://localhost:3001/pokemons/${id}`, 
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => { 
+        console.log('Pokemon was deleted!')
+      })
+  }
+
   static propTypes = {
     pokemon: PropTypes.object.isRequired
   }
@@ -22,7 +34,7 @@ export default class Pokemon extends React.Component {
     if(this.props.match) {
       $.ajax({
         type: "GET",
-        url: `http://localhost:3001/pokemons/${this.props.match.params.id}`,
+        url: `http://localhost:3000/pokemons/${this.props.match.params.id}`,
         dataType: "JSON"
       }).done((data) => {
         this.setState({pokemon: data});
@@ -37,9 +49,7 @@ export default class Pokemon extends React.Component {
           <h3>{this.state.pokemon.name}</h3>
         </Link>
         <p>{(this.state.pokemon.region)}</p>
-        <Link to={`/pokemons/${this.state.pokemon.id}/edit`} >
-          Edit
-        </Link>
+        <button onClick={() => this.props.handleDelete(this.props.pokemon.id)}>Delete</button>
       </div>
      )
   }

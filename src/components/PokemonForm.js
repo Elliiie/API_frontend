@@ -116,31 +116,45 @@ export default class PokemonForm extends React.Component {
     });
   }
 
-  addPokemon () {
-    const pokemon = {name: this.state.name.value,
-                     level: this.state.level.value,
-                     primary_type: this.state.primary_type.value,
-                     secondary_type: this.state.secondary_type.value,
-                     trainer_name: this.state.trainer_name.value,
-                     hight: this.state.hight.value,
-                     weight: this.state.weight.value,
-                     gender: this.state.gender.value,
-                     region: this.state.region.value};
+  addPokemon =()=> {
+    const props = this.props;
+    console.log(this.state)
+
+    fetch('http://localhost:3001/pokemons',{
+      method:'POST',
+      cors:'no-cors',
+      headers: {
+        'Content-type' : 'application/json'
+      },
+      body:JSON.stringify(this.state)
+    });
+    /*                 
     $.post('http://localhost:3001/pokemons',
             {pokemon: pokemon})
           .done((data) => {
-            this.props.handleNewPokemon(data);
+              console.log(props);
+
+            props.handleNewPokemon(data);
             this.resetFormErrors();
           })
           .fail((response) => {
             this.setState({formErrors: response.responseJSON,
                             formValid: false});
-          });
+          });*/
+  }
+
+  handleChange = (e)=>{
+    this.setState({[e.target.name]:e.target.value});
+        console.log(this.state)
+
   }
 
   deletePokemon = () => {
     if(window.confirm("Are you sure you want to delete this pokemon?")) {
-      $.ajax({
+      fetch(`http://localhost:3001/pokemons/${this.props.match.params.id}`,{
+        method:'DELETE'
+      });
+      /*$.ajax({
         type: "DELETE",
         url: `http://localhost:3001/pokemons/${this.props.match.params.id}`
       })
@@ -150,7 +164,7 @@ export default class PokemonForm extends React.Component {
       })
       .fail((response) => {
         console.log('pokemon deleting failed!');
-      });
+      });*/
     }
   }
 
@@ -159,6 +173,7 @@ export default class PokemonForm extends React.Component {
   }
 
   render () {
+    console.log(this.props)
     return (
       <div>
         <h2>
