@@ -14,7 +14,7 @@ class App extends Component {
   componentDidMount() {
     $.ajax({
       type: "GET",
-      url: 'http://localhost:3001/pokemons'
+      url: 'http://localhost:3001/pokemons/'
     }).done(data => {
       this.setState({pokemons: data});
     });

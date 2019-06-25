@@ -128,19 +128,6 @@ export default class PokemonForm extends React.Component {
       },
       body:JSON.stringify(this.state)
     });
-    /*                 
-    $.post('http://localhost:3001/pokemons',
-            {pokemon: pokemon})
-          .done((data) => {
-              console.log(props);
-
-            props.handleNewPokemon(data);
-            this.resetFormErrors();
-          })
-          .fail((response) => {
-            this.setState({formErrors: response.responseJSON,
-                            formValid: false});
-          });*/
   }
 
   handleChange = (e)=>{
@@ -149,6 +136,25 @@ export default class PokemonForm extends React.Component {
 
   }
 
+  delete(id){
+      var newPokemons = this.state.pokemons.filter((p) => p.id !== id)
+      this.setState({
+        pokemons: newPokemons
+      })
+    }
+
+    deletePokemon(id){
+      fetch(`http://localhost:3001/pokemons/${this.props.match.params.id}`,{
+        method:'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((response) => { 
+        this.delete(this.props.match.params.id)
+      });
+    
+  }
+  /*
   deletePokemon = () => {
     if(window.confirm("Are you sure you want to delete this pokemon?")) {
       fetch(`http://localhost:3001/pokemons/${this.props.match.params.id}`,{
@@ -164,9 +170,9 @@ export default class PokemonForm extends React.Component {
       })
       .fail((response) => {
         console.log('pokemon deleting failed!');
-      });*/
+      });
     }
-  }
+  }*/
 
   resetFormErrors () {
     this.setState({formErrors: {}})
