@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "immutability-helper": "^3.0.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment": "^2.24.0",
     "react-dom": "^15.1.1",
     "react": "^15.1.1",
